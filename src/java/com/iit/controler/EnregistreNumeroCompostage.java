@@ -5,15 +5,11 @@
  */
 package com.iit.controler;
 
-import com.iit.dao.EnseignantADO;
-import com.iit.dao.EtudiantDAO;
-import com.iit.dao.GroupeDAO;
-import com.iit.model.Enseignant;
-import com.iit.model.Etudiant;
-import com.iit.model.NiveauGroupe;
+import com.iit.dao.NoteDAO;
+import com.iit.model.Note;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.util.Enumeration;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author SAMSUNG
  */
-@WebServlet(name = "EtudiantServlet", urlPatterns = {"/EtudiantServlet"})
-public class EtudiantServlet extends HttpServlet {
+@WebServlet(name = "EnregistreNumeroCompostage", urlPatterns = {"/EnregistreNumeroCompostage"})
+public class EnregistreNumeroCompostage extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,19 +38,26 @@ public class EtudiantServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-             EtudiantDAO Etudiant = new EtudiantDAO();
-             GroupeDAO Groupe = new GroupeDAO();
-             ArrayList<Etudiant> ensList = new ArrayList<Etudiant>();
-             ArrayList<NiveauGroupe> groupList = new ArrayList<NiveauGroupe>();
-             ensList= Etudiant.listEtud(); 
-            groupList=Groupe.listGroupe();
-            
-           
-            request.setAttribute("etudList", ensList);
-            request.setAttribute("groupList", groupList);
-            
-           RequestDispatcher rd = getServletContext().getRequestDispatcher("/etudiant.jsp");
-             rd.forward(request, response);
+            Enumeration param = request.getParameterNames();
+            int idMe = Integer.parseInt(request.getParameter("mat_ens"));
+            int idSess = Integer.parseInt(request.getParameter("sessin"));
+
+            param.nextElement();
+            param.nextElement();
+            param.nextElement();
+            int idEtud;
+            NoteDAO nDAO = new NoteDAO();
+            Note n;
+            while (param.hasMoreElements()) {
+                idEtud = Integer.parseInt((String) param.nextElement());
+
+                n = new Note(idMe, idEtud, idSess, request.getParameter(String.valueOf(idEtud)));
+                nDAO.ajouterCompostage(n);
+            }
+            //request.get("id_s", idSess);
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/EcrireNumeroCompostage?id_s=1"+idSess);
+            rd.forward(request, response);
+
         }
     }
 

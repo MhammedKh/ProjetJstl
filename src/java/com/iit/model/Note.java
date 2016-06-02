@@ -11,11 +11,23 @@ package com.iit.model;
  */
 public class Note {
     
+    private int idMe;
+    private int idEt;
+    private int id_Ses;
     private double tp;
     private double ds;
     private double examain;
     private double presentielle;
     private String numCompostage;
+
+    public Note(int idEt, double tp, double ds, double examain, double presentielle, String numCompostage) {
+        this.idEt = idEt;
+        this.tp = tp;
+        this.ds = ds;
+        this.examain = examain;
+        this.presentielle = presentielle;
+        this.numCompostage = numCompostage;
+    }
 
     public Note(double tp, double ds, double examain, double presentielle, String numCompostage) {
         this.tp = tp;
@@ -23,6 +35,39 @@ public class Note {
         this.examain = examain;
         this.presentielle = presentielle;
         this.numCompostage = numCompostage;
+    }
+
+    public Note(int idMe, int idEt, int id_Ses, String numCompostage) {
+        this.idMe = idMe;
+        this.idEt = idEt;
+        this.id_Ses = id_Ses;
+        this.numCompostage = numCompostage;
+    }
+
+  
+
+    public int getIdMe() {
+        return idMe;
+    }
+
+    public void setIdMe(int idMe) {
+        this.idMe = idMe;
+    }
+
+    public int getIdEt() {
+        return idEt;
+    }
+
+    public void setIdEt(int idEt) {
+        this.idEt = idEt;
+    }
+
+    public int getId_Ses() {
+        return id_Ses;
+    }
+
+    public void setId_Ses(int id_Ses) {
+        this.id_Ses = id_Ses;
     }
 
     public double getTp() {

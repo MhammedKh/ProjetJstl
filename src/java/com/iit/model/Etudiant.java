@@ -9,7 +9,7 @@ package com.iit.model;
  *
  * @author SAMSUNG
  */
-public class Etudiant {
+public class Etudiant extends Utilisateur{
 
 
     private int id;
@@ -21,6 +21,10 @@ public class Etudiant {
      private String tel;
     private int cin;
     private String groupe;
+
+    public Etudiant(int id) {
+        this.id = id;
+    }
 
     public Etudiant( String nom, String prenom, String login, String motPasse, String adresse, String tel, int cin, String groupe) {
         

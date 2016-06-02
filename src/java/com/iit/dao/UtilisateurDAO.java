@@ -6,6 +6,9 @@
 package com.iit.dao;
 
 import com.iit.model.ConnectionBaseDonnee;
+import com.iit.model.Enseignant;
+import com.iit.model.Etudiant;
+import com.iit.model.Utilisateur;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -30,6 +33,25 @@ public class UtilisateurDAO {
             return false;
         }
 
+    }
+
+    public Utilisateur getUserLoginPass(String login, String mp) {
+        try {
+            ResultSet rs = connection.select("select * from utilisateur where login='" + login + "' and mp = '" + mp + "' ;");
+            rs.first();
+            if (rs.getInt("type") == 2) {
+
+                return new Enseignant(rs.getInt("id"));
+
+            } else if (rs.getInt("type") == 3) {
+
+                return new Etudiant(rs.getInt("id"));
+
+            }
+        } catch (SQLException e) {
+
+        }
+        return null;
     }
 
 }

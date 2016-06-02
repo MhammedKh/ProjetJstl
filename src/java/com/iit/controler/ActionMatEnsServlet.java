@@ -5,15 +5,13 @@
  */
 package com.iit.controler;
 
-import com.iit.dao.EnseignantADO;
-import com.iit.dao.EtudiantDAO;
-import com.iit.dao.GroupeDAO;
+import com.iit.dao.MatiereEnsDAO;
 import com.iit.model.Enseignant;
-import com.iit.model.Etudiant;
-import com.iit.model.NiveauGroupe;
+import com.iit.model.Groupe;
+import com.iit.model.Matiere;
+import com.iit.model.MatiereEns;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,8 +23,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author SAMSUNG
  */
-@WebServlet(name = "EtudiantServlet", urlPatterns = {"/EtudiantServlet"})
-public class EtudiantServlet extends HttpServlet {
+@WebServlet(name = "ActionMatEnsServlet", urlPatterns = {"/ActionMatEnsServlet"})
+public class ActionMatEnsServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,19 +40,14 @@ public class EtudiantServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-             EtudiantDAO Etudiant = new EtudiantDAO();
-             GroupeDAO Groupe = new GroupeDAO();
-             ArrayList<Etudiant> ensList = new ArrayList<Etudiant>();
-             ArrayList<NiveauGroupe> groupList = new ArrayList<NiveauGroupe>();
-             ensList= Etudiant.listEtud(); 
-            groupList=Groupe.listGroupe();
-            
-           
-            request.setAttribute("etudList", ensList);
-            request.setAttribute("groupList", groupList);
-            
-           RequestDispatcher rd = getServletContext().getRequestDispatcher("/etudiant.jsp");
-             rd.forward(request, response);
+             MatiereEnsDAO mE = new MatiereEnsDAO();
+              Groupe g = new Groupe(Integer.parseInt(request.getParameter("group")));
+               Enseignant e = new Enseignant(Integer.parseInt(request.getParameter("ens")));
+                Matiere m = new Matiere(Integer.parseInt(request.getParameter("matiere")));
+                MatiereEns oME = new MatiereEns(e, g, m);
+                mE.ajouterMatiereEns(oME);
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/ActionGroupeServlet?id_event=zoom&id_g="+request.getParameter("group"));
+                rd.forward(request, response);
         }
     }
 

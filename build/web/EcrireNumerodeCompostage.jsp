@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html >
+<html>
     <head>
 
         <!-- start: Meta -->
@@ -114,141 +114,218 @@
                             <a href="#">Editer Session</a>
                         </li>
                     </ul>
+                    <c:if test="${requestScope.ListEtud == null}"> 
+                        <div class="row-fluid sortable">
+                            <div class="box span12">
+                                <div class="box-header" data-original-title>
+                                    <h2><i class="halflings-icon edit"></i><span class="break"></span>choisir groupe et matiére</h2>
+                                    <div class="box-icon">
 
-                    <div class="row-fluid sortable">
-                        <div class="box span12">
-                            <div class="box-header" data-original-title>
-                                <h2><i class="halflings-icon edit"></i><span class="break"></span>choisir groupe et matiére</h2>
-                                <div class="box-icon">
+                                        <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                                        <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+                                    </div>
 
-                                    <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
-                                    <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+
                                 </div>
 
 
-                            </div>
+
+                                <div class="box-content">
+
+                                    <form class="form-horizontal" method="Get" action="EcrireNumeroCompostage">
+                                        <fieldset>
 
 
-
-                            <div class="box-content">
-
-                                <form class="form-horizontal" method="Get" action="EcrireNumeroCompostage">
-                                    <fieldset>
-
-
-                                        <c:if test="${requestScope.matiereList == null}">   
-                                            <div class="control-group">
-                                                <label class="control-label" for="selectError">Groupe</label>
-                                                <div class="controls">
-                                                    <select id="selectError" value=" " name="groupe" data-rel="chosen" onchange='window.location.href = "EcrireNumeroCompostage?id_s=" +<c:out value="${requestScope.id_session }"></c:out> + "&id_event=mat&id_g=" + this.options[this.selectedIndex].value;'>
-                                                            <option value=""> </option>
-                                                        <c:forEach items="${requestScope.groupList}" var="groupe">
-                                                            <option value="<c:out value="${groupe.g.id}"></c:out>"> <c:out value="${groupe.g.nom}"></c:out></option>
-                                                        </c:forEach>
-                                                    </select>
-                                                </div>
-                                            </div> 
-                                        </c:if>
-                                        <c:if test="${requestScope.matiereList != null}"> 
-                                            <input type="hidden"  name="id_event" value="form" required> 
-                                            <input type="hidden"  name="group" value="<c:out value="${requestScope.groupe.id}" escapeXml="true"></c:out>" required> 
-                                            <input type="hidden"  name="sess" value="<c:out value="${requestScope.id_session}" escapeXml="true"></c:out>" required> 
+                                            <c:if test="${requestScope.matiereList == null}">   
                                                 <div class="control-group">
-                                                    <label class="control-label">Groupe</label>
+                                                    <label class="control-label" for="selectError">Groupe</label>
                                                     <div class="controls">
-                                                        <span class="input-xlarge uneditable-input" name="nom_groupe"><c:out value="${requestScope.groupe.nom}" escapeXml="true"></c:out></span>
+                                                        <select id="selectError" value=" " name="groupe" data-rel="chosen" onchange='window.location.href = "EcrireNumeroCompostage?id_s=" +<c:out value="${requestScope.id_session }"></c:out> + "&id_event=mat&id_g=" + this.options[this.selectedIndex].value;'>
+                                                                <option value=""> </option>
+                                                            <c:forEach items="${requestScope.groupList}" var="groupe">
+                                                                <option value="<c:out value="${groupe.g.id}"></c:out>"> <c:out value="${groupe.g.nom}"></c:out></option>
+                                                            </c:forEach>
+                                                        </select>
                                                     </div>
+                                                </div> 
+                                            </c:if>
+                                            <c:if test="${requestScope.matiereList != null}"> 
+                                                <input type="hidden"  name="id_event" value="form" required> 
+                                                <input type="hidden"  name="group" value="<c:out value="${requestScope.groupe.id}" escapeXml="true"></c:out>" required> 
+                                                <input type="hidden"  name="sess" value="<c:out value="${requestScope.id_session}" escapeXml="true"></c:out>" required> 
+                                                <input type="hidden"  name="nom_groupe" value="<c:out value="${requestScope.groupe.nom}" escapeXml="true"></c:out>" required> 
+                                                    <div class="control-group">
+                                                        <label class="control-label">Groupe</label>
+                                                        <div class="controls">
+                                                            <span class="input-xlarge uneditable-input" ><c:out value="${requestScope.groupe.nom}" escapeXml="true"></c:out></span>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="selectError">Matiére</label>
+                                                        <div class="controls">
+                                                            <select id="selectError" name="matiere" data-rel="chosen">
+                                                            <c:forEach items="${requestScope.matiereList}" var="matiere">
+                                                                <option value="<c:out value="${matiere.id}"></c:out>"><c:out value="${matiere.nom}"></c:out></option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>
+                                                </div> 
+
+
+                                                <div class="form-actions">
+
+
+
+                                                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                                                    <button  type="reset" class="btn"  onClick='window.location.href = "ListeGroupeEnseignant?id_e=" +<c:out value="${requestScope.id_e }"></c:out>' > Cancel</button>
+                                                    </div>
+                                            </c:if>
+                                        </fieldset>
+                                    </form>
+                                </div>
+
+
+
+
+                            </div><!--/span-->
+
+                        </div><!--/row-->
+                    </c:if>
+                    <c:if test="${requestScope.ListEtud != null}"> 
+
+
+                        <div class="row-fluid sortable">
+                            <div class="box span12">
+                                <div class="box-header" data-original-title>
+                                    <h2><i class="halflings-icon list"></i><span class="break"></span>Groupe et matiére</h2>
+                                    <div class="box-icon">
+
+                                        <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                                        <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+                                    </div>
+
+
+                                </div>
+
+
+
+                                <div class="box-content">
+
+
+                                    <div class="form-horizontal">
+
+
+
+
+
+                                        <div class="control-group">
+                                            <label class="control-label">Groupe</label>
+                                            <div class="controls">
+                                                <span class="input-xlarge uneditable-input" ><c:out value="${requestScope.nom_g}" escapeXml="true"></c:out></span>
                                                 </div>
+                                            </div>
 
 
 
-                                                <div class="control-group">
-                                                    <label class="control-label" for="selectError">Matiére</label>
-                                                    <div class="controls">
-                                                        <select id="selectError" name="matiere" data-rel="chosen">
-                                                        <c:forEach items="${requestScope.matiereList}" var="matiere">
-                                                            <option value="<c:out value="${matiere.id}"></c:out>"><c:out value="${matiere.nom}"></c:out></option>
-                                                        </c:forEach>
-                                                    </select>
+                                            <div class="control-group">
+                                                <label class="control-label">Matiére</label>
+                                                <div class="controls">
+                                                    <span class="input-xlarge uneditable-input" name="nom_matiere"><c:out value="${requestScope.matiere.nom}" escapeXml="true"></c:out></span>
                                                 </div>
-                                            </div> 
+                                            </div>
 
 
+
+
+
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div><!--/span-->
+
+                            </div><!--/row-->
+
+
+
+
+
+
+
+
+
+
+                            <div class="row-fluid sortable">
+                                <div class="box span12">
+                                    <div class="box-header" data-original-title>
+                                        <h2><i class="halflings-icon edit "></i><span class="break"></span>Numero de compostage</h2>
+                                        <div class="box-icon">
+
+                                            <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                                            <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+                                        </div>
+
+
+                                    </div>
+
+
+
+                                    <div class="box-content">
+                                        <form  method="Get" action="EnregistreNumeroCompostage">
+                                            <input type="hidden"  name="mat_ens" value="<c:out value="${requestScope.mat_ens.id}" escapeXml="true"></c:out>" required> 
+                                        <input type="hidden"  name="sessin" value="<c:out value="${requestScope.id_session}" escapeXml="true"></c:out>" required> 
+                                            <table class="table table-striped table-bordered bootstrap-datatable datatable" >
+                                                <thead>
+                                                    <tr>
+
+                                                        <th>CIN</th>
+                                                        <th>Nom </th>
+                                                        <th>Prenom</th>
+                                                        <th>Numéro de compostage</th> 
+
+
+                                                    </tr>
+                                                </thead>   
+                                                <tbody>
+
+                                                <c:forEach items="${requestScope.ListEtud}" var="etud">
+                                                    <tr>
+
+                                                        <td style="vertical-align:middle;" class="center" ><c:out value="${etud.cin}"></c:out></td>
+                                                        <td style="vertical-align:middle;" class="center"><c:out value="${etud.nom}"></c:out> </td>
+                                                        <td style="vertical-align:middle;" class="center"><c:out value="${etud.prenom}"></c:out> </td>
+                                                        <td style="vertical-align:middle;" class="center"> <input type="text" name="<c:out value="${etud.id}"></c:out>"  > </td>
+
+                                                        </tr>
+                                                </c:forEach>
+
+
+                                            </tbody>
+                                        </table> 
+
+                                        
                                             <div class="form-actions">
 
 
+                                                <button type="submit" class="btn btn-primary">Ajouter</button>
 
-                                                <button type="submit" class="btn btn-primary"><c:if test="${requestScope.btnmodif == null }">Ajouter</c:if><c:if test="${requestScope.btnmodif != null }">Modifier</c:if></button>
-                                                <button  type="reset" class="btn"  onClick='window.location.href = "ListeGroupeEnseignant?id_e=" +<c:out value="${requestScope.id_e }"></c:out>' > Cancel</button>
-                                                </div>
-                                        </c:if>
-                                    </fieldset>
-                                </form>
-                            </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
 
 
 
 
-                        </div><!--/span-->
+                                </div><!--/span-->
 
-                    </div><!--/row-->
- <c:if test="${requestScope.mat_ens != null}"> 
-
-                    <div class="row-fluid sortable">
-                        <div class="box span12">
-                            <div class="box-header" data-original-title>
-                                <h2><i class="halflings-icon user"></i><span class="break"></span>Liste des groupe</h2>
-                                <div class="box-icon">
-
-                                    <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
-                                    <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
-                                </div>
-
-
-                            </div>
-
-
-
-                            <div class="box-content">
-
-                                <table class="table table-striped table-bordered bootstrap-datatable datatable" >
-                                    <thead>
-                                        <tr>
-
-                                            <th>CIN</th>
-                                            <th>Nom </th>
-                                            <th>Prenom</th>
-                                            <th>Numéro de compostage</th> 
-
-
-                                        </tr>
-                                    </thead>   
-                                    <tbody>
-                                        <c:forEach items="${requestScope.ListEtud}" var="etud">
-                                            <tr>
-
-                                                <td style="vertical-align:middle;" class="center" ><c:out value="${etud.cin}"></c:out></td>
-                                                <td style="vertical-align:middle;" class="center"><c:out value="${etud.nom}"></c:out> </td>
-                                                <td style="vertical-align:middle;" class="center"><c:out value="${etud.prenom}"></c:out> </td>
-                                                <td style="vertical-align:middle;" class="center"> <input type="text" name="nom"  > </td>
-
-                                                </tr>
-                                        </c:forEach>
-
-
-
-                                    </tbody>
-                                </table> 
-
-                            </div>
-
-
-
-
-                        </div><!--/span-->
-
-                    </div><!--/row-->
-</c:if>
+                            </div><!--/row-->
+                    </c:if>
 
 
                 </div>

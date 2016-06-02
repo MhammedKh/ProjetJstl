@@ -37,15 +37,18 @@ public class choixSessionNumeroCompostageServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */         
+            /* TODO output your page here. You may use following sample code. */
             SessionDAO sDAO = new SessionDAO();
             ArrayList<Session> sessionList = new ArrayList<Session>();
             sessionList = sDAO.listSession();
             request.setAttribute("sessionList", sessionList);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/choixSessionCompostage.jsp");
-            rd.forward(request, response);
+            if (request.getParameter("id_form") != null) {
+                request.setAttribute("id_form", "listnote");
+            } 
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/choixSessionCompostage.jsp");
+                rd.forward(request, response);
             
-            
+
         }
     }
 

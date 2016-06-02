@@ -5,12 +5,18 @@
  */
 package com.iit.controler;
 
+import com.iit.dao.EnseignantADO;
 import com.iit.dao.EtudiantDAO;
 import com.iit.dao.GroupeDAO;
+import com.iit.dao.MatiereEnsDAO;
+import com.iit.model.Enseignant;
 import com.iit.model.Etudiant;
 import com.iit.model.Groupe;
+import com.iit.model.Matiere;
+import com.iit.model.MatiereEns;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -65,6 +71,21 @@ public class ActionGroupeServlet extends HttpServlet {
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/GroupeServlet");
                 rd.forward(request, response);
 
+            }else if(request.getParameter("id_event").equals("zoom"))
+            {
+                
+               MatiereEnsDAO  mEnsDAO = new  MatiereEnsDAO();
+               EnseignantADO ensDAO = new EnseignantADO();
+               ArrayList<Matiere> listMatGroup = mEnsDAO.listMatiereGroupe(Integer.parseInt(request.getParameter("id_g")));
+               ArrayList<Matiere> listMatNonGroup = mEnsDAO.listMatiereNonGroupe(Integer.parseInt(request.getParameter("id_g")));
+               ArrayList<Enseignant> listEns = ensDAO.listEns();
+               request.setAttribute("group", request.getParameter("id_g"));
+               request.setAttribute("ListE", listEns);
+               request.setAttribute("ListM", listMatGroup);
+               request.setAttribute("ListNonG", listMatNonGroup);
+               RequestDispatcher rd = getServletContext().getRequestDispatcher("/listeMatiereGroupe.jsp");
+                rd.forward(request, response);
+                      
             }
         }
     }

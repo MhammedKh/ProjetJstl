@@ -94,7 +94,7 @@ if(isset($_SESSION['id'])){ ?>
 							<a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Gestion des notes</span></a>
 							<ul>
 								<li><a class="submenu" href="choixSessionNumeroCompostageServlet"><i class="icon-file-alt"></i><span class="hidden-tablet"> Numeros de compostage </span></a></li>
-								<li><a class="submenu" href="submenu2.html"><i class="icon-file-alt"></i><span class="hidden-tablet"> Consulter les note</span></a></li>
+								<li><a class="submenu" href="choixSessionNumeroCompostageServlet?id_form=consult_note"><i class="icon-file-alt"></i><span class="hidden-tablet"> Consulter les note</span></a></li>
 
 							</ul>	
 						</li>

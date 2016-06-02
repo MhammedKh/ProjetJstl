@@ -11,6 +11,7 @@
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/model/Note.java</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/dao/SessionDAO.java</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/model/Administrateur.java</file>
+            <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/web/saisiNoteProf.jsp</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/controler/choixSessionNumeroCompostageServlet.java</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/model/Niveau.java</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/web/niveau.jsp</file>
@@ -22,11 +23,18 @@
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/controler/AuthentificationServlet.java</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/controler/ActionSessionServlet.java</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/web/authentification.jsp</file>
+            <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/model/Utilisateur.java</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/web/js/custom.js</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/web/js/bootstrap.min.js</file>
+            <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/web/listeMatiereGroupe.jsp</file>
+            <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/web/consultationGroupeEns.jsp</file>
+            <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/controler/consultroupeEnsServlet.java</file>
+            <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/web/consultNoteAdmin.jsp</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/controler/ActionGroupeEnsegnant.java</file>
+            <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/controler/EnregistreNumeroCompostage.java</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/dao/GroupeDAO.java</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/web/enseignant.jsp</file>
+            <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/controler/consultnote.java</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/web/js/fullcalendar.min.js</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/model/NiveauGroupe.java</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/dao/EnseignantADO.java</file>
@@ -34,14 +42,18 @@
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/controler/ListeGroupeEnseignant.java</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/web/js/excanvas.js</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/web/listegroupeenseignant.jsp</file>
+            <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/dao/NoteDAO.java</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/dao/MatiereDAO.java</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/controler/EnseignantServlet.java</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/model/main.java</file>
+            <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/controler/ActionMatEnsServlet.java</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/web/js/jquery-1.9.1.min.js</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/model/MatiereEns.java</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/model/Enseignant.java</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/web/js/jquery-ui-1.10.0.custom.min.js</file>
+            <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/web/homeEnseignant.jsp</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/web/session.jsp</file>
+            <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/web/consultationNotEns.jsp</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/web/EcrireNumerodeCompostage.jsp</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/model/ConnectionBaseDonnee.java</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/model/Session.java</file>
@@ -52,6 +64,7 @@
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/web/js/counter.js</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/web/choixSessionCompostage.jsp</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/web/js/bootstrap.js</file>
+            <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/model/NoteEtud.java</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/model/Etudiant.java</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/controler/EcrireNumeroCompostage.java</file>
             <file>file:/D:/IIt%202eme_annee/simestre%202/SERVLET/projet/projet_jstl/ProjetJstl/src/java/com/iit/model/Groupe.java</file>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html >
+<html lang="en">
     <head>
 
         <!-- start: Meta -->
@@ -111,20 +111,13 @@
                         </li>
                         <li>
                             <i class="icon-edit"></i>
-                            <a href="#">Choisir Session</a>
+                            <a href="#">Affectation Matiere</a>
                         </li>
                     </ul>
                     <div class="row-fluid sortable">
                         <div class="box span12">
-                         
-
-
-                         
-
-                    <div class="row-fluid sortable">
-                        <div class="box span12">
                             <div class="box-header" data-original-title>
-                                <h2><i class="halflings-icon list"></i><span class="break"></span>Choisir une Session</h2>
+                                <h2><i class="halflings-icon edit"></i><span class="break"></span>Affectation Matiére</h2>
                                 <div class="box-icon">
 
                                     <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
@@ -133,6 +126,68 @@
 
 
                             </div>
+                         
+
+
+                            <div class="box-content">
+
+                                <form class="form-horizontal" method="Get" action="ActionMatEnsServlet">
+                                    <fieldset>
+                                        <input type="hidden"  name="id_event" value="form" required> 
+                                        <input type="hidden"  name="group" value="<c:out value="${requestScope.group}" escapeXml="true"></c:out>"> 
+                                       
+                                        <div class="control-group">
+								<label class="control-label" for="selectError">Matiére</label>
+								<div class="controls">
+								  <select id="selectError" name="matiere" data-rel="chosen">
+                                                                      <c:forEach items="${requestScope.ListNonG}" var="nMatiere">
+                                                                          <option value="<c:out value="${nMatiere.id}"></c:out>" ><c:out value="${nMatiere.nom}"></c:out></option>
+                                                                      </c:forEach>
+								  </select>
+								</div>
+							  </div> 
+                                      
+
+
+                                                 <div class="control-group">
+								<label class="control-label" for="selectError">Enseignant</label>
+								<div class="controls">
+								  <select id="selectError" name="ens" >
+                                                                      <c:forEach items="${requestScope.ListE}" var="enseignant">
+                                                                          <option value="<c:out value="${enseignant.id}"></c:out>" ><c:out value="${enseignant.nom}"></c:out>  <c:out value="${enseignant.prenom}"></c:out></option>
+                                                                      </c:forEach>
+								  </select>
+								</div>
+							  </div> 
+                                         
+                                        
+                                                         
+                                          <div class="form-actions">
+                                            <button type="submit" class="btn btn-primary">Affecter</button>
+                                            <button  type="reset" class="btn">Cancel</button>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+
+
+
+
+                        </div><!--/span-->
+
+                    </div><!--/row-->
+
+
+                    <div class="row-fluid sortable">
+                        <div class="box span12">
+                            <div class="box-header" data-original-title>
+                                <h2><i class="halflings-icon user"></i><span class="break"></span>Liste des Matiére</h2>
+                                <div class="box-icon">
+
+                                    <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                                    <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+                                </div>
+ </div>
 
 
 
@@ -142,40 +197,26 @@
                                     <thead>
                                         <tr>
                                             
-                                            <th>Type</th>
-                                            <th>Date de début</th>
-                                             <th>Date de fin</th>
+                                            <th>Nom</th>
+                                            
                                             
                                             <th>Actions</th>
                                         </tr>
                                     </thead>   
                                     <tbody>
-                                        <c:forEach items="${requestScope.sessionList}" var="session">
+                                        <c:forEach items="${requestScope.ListM}" var="matiere">
                                             <tr>
                                               
-                                                <td style="vertical-align:middle;" class="center" ><c:out value="${session.type}"></c:out></td>
-                                                <td style="vertical-align:middle;" class="center"><c:out value="${session.datedeb}"></c:out> </td>
-                                                <td style="vertical-align:middle;" class="center"><c:out value="${session.datefin}"></c:out> </td>
+                                                <td style="vertical-align:middle;" class="center" ><c:out value="${matiere.nom}"></c:out></td>
                                                
-                                                 <c:if test="${requestScope.id_form == null}"> 
+                                               
                                                     <td style="vertical-align:middle;" class="center">
-                                                        <a class="btn btn-success" href="EcrireNumeroCompostage?id_s=<c:out value="${session.id}"></c:out>" >
-                                                            <i class="halflings-icon white zoom-in"></i>  
+                                                        <a class="btn btn-danger" href="ActionGroupeServlet?id_event=delete&id_m=<c:out value="${matiere.id}"></c:out>&id_g=<c:out value="${requestScope.group}" escapeXml="true"></c:out>" >
+                                                          <i class="halflings-icon white trash"></i> 
                                                         </a>
                                                         
 
                                                     </td>
-                                                 </c:if>
-                                                           <c:if test="${requestScope.id_form !=null}"> 
-                                                    <td style="vertical-align:middle;" class="center">
-                                                        <a class="btn btn-success" href="consultnote?id_s=<c:out value="${session.id}"></c:out>" >
-                                                            <i class="halflings-icon white zoom-in"></i>  
-                                                        </a>
-                                                        
-
-                                                    </td>
-                                                 </c:if>
-                                                    
                                                 </tr>
                                         </c:forEach>
 

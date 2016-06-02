@@ -114,7 +114,7 @@
                             <a href="#">Editer Session</a>
                         </li>
                     </ul>
-                    <c:if test="${requestScope.ListEtud == null}"> 
+                    <c:if test="${requestScope.listN == null}"> 
                         <div class="row-fluid sortable">
                             <div class="box span12">
                                 <div class="box-header" data-original-title>
@@ -132,7 +132,7 @@
 
                                 <div class="box-content">
 
-                                    <form class="form-horizontal" method="Get" action="EcrireNumeroCompostage">
+                                    <form class="form-horizontal" method="Get" action="consultnote">
                                         <fieldset>
 
 
@@ -140,7 +140,7 @@
                                                 <div class="control-group">
                                                     <label class="control-label" for="selectError">Groupe</label>
                                                     <div class="controls">
-                                                        <select id="selectError" value=" " name="groupe" data-rel="chosen" onchange='window.location.href = "EcrireNumeroCompostage?id_s=" +<c:out value="${requestScope.id_session }"></c:out> + "&id_event=mat&id_g=" + this.options[this.selectedIndex].value;'>
+                                                        <select id="selectError" value=" " name="groupe" data-rel="chosen" onchange='window.location.href = "consultnote?id_s=" +<c:out value="${requestScope.id_session }"></c:out> + "&id_event=mat&id_g=" + this.options[this.selectedIndex].value;'>
                                                                 <option value=""> </option>
                                                             <c:forEach items="${requestScope.groupList}" var="groupe">
                                                                 <option value="<c:out value="${groupe.g.id}"></c:out>"> <c:out value="${groupe.g.nom}"></c:out></option>
@@ -166,7 +166,7 @@
                                                     <div class="control-group">
                                                         <label class="control-label" for="selectError">Matiére</label>
                                                         <div class="controls">
-                                                            <select id="selectError" name="matiere" data-rel="chosen">
+                                                            <select id="selectError" name="matiere" data-rel="chosen"   >
                                                             <c:forEach items="${requestScope.matiereList}" var="matiere">
                                                                 <option value="<c:out value="${matiere.id}"></c:out>"><c:out value="${matiere.nom}"></c:out></option>
                                                             </c:forEach>
@@ -194,7 +194,7 @@
 
                         </div><!--/row-->
                     </c:if>
-                    <c:if test="${requestScope.ListEtud != null}"> 
+                    <c:if test="${requestScope.listN != null}"> 
 
 
                         <div class="row-fluid sortable">
@@ -263,7 +263,7 @@
                             <div class="row-fluid sortable">
                                 <div class="box span12">
                                     <div class="box-header" data-original-title>
-                                        <h2><i class="halflings-icon edit "></i><span class="break"></span>Numero de compostage</h2>
+                                        <h2><i class="halflings-icon edit "></i><span class="break"></span>Liste des Notes</h2>
                                         <div class="box-icon">
 
                                             <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
@@ -276,9 +276,9 @@
 
 
                                     <div class="box-content">
-                                        <form  method="Get" action="EnregistreNumeroCompostage">
-                                            <input type="hidden"  name="mat_ens" value="<c:out value="${requestScope.mat_ens.id}" escapeXml="true"></c:out>" required> 
-                                        <input type="hidden"  name="sessin" value="<c:out value="${requestScope.id_session}" escapeXml="true"></c:out>" required> 
+                                       
+                                           
+                                       
                                             <table class="table table-striped table-bordered bootstrap-datatable datatable" >
                                                 <thead>
                                                     <tr>
@@ -286,20 +286,28 @@
                                                         <th>CIN</th>
                                                         <th>Nom </th>
                                                         <th>Prenom</th>
-                                                        <th>Numéro de compostage</th> 
+                                                        <th>Numéro de compostage</th>
+                                                        <th>Note TP</th> 
+                                                        <th>Note DS</th> 
+                                                        <th>Note Examain</th> 
+                                                        <th>Note Précense</th> 
 
 
                                                     </tr>
                                                 </thead>   
                                                 <tbody>
 
-                                                <c:forEach items="${requestScope.ListEtud}" var="etud">
+                                                <c:forEach items="${requestScope.listN}" var="note">
                                                     <tr>
 
-                                                        <td style="vertical-align:middle;" class="center" ><c:out value="${etud.cin}"></c:out></td>
-                                                        <td style="vertical-align:middle;" class="center"><c:out value="${etud.nom}"></c:out> </td>
-                                                        <td style="vertical-align:middle;" class="center"><c:out value="${etud.prenom}"></c:out> </td>
-                                                        <td style="vertical-align:middle;" class="center"> <input type="text" name="<c:out value="${etud.id}"></c:out>"  > </td>
+                                                        <td style="vertical-align:middle;" class="center"><c:out value="${note.e.cin}"></c:out></td>
+                                                        <td style="vertical-align:middle;" class="center"><c:out value="${note.e.nom}"></c:out> </td>
+                                                        <td style="vertical-align:middle;" class="center"><c:out value="${note.e.prenom}"></c:out> </td>
+                                                        <td style="vertical-align:middle;" class="center">  <c:out value="${note.n.numCompostage}"></c:out>  </td>
+                                                        <td style="vertical-align:middle;" class="center"><c:if test="${note.n.ds != -1}"><c:out value="${note.n.tp}"></c:out></c:if></td>
+                                                        <td style="vertical-align:middle;" class="center"><c:if test="${note.n.ds != -1}"><c:out value="${note.n.ds}"></c:out> </c:if></td>
+                                                        <td style="vertical-align:middle;" class="center"><c:if test="${note.n.ds != -1}"><c:out value="${note.n.examain}"></c:out></c:if> </td>
+                                                        <td style="vertical-align:middle;" class="center"><c:if test="${note.n.ds != -1}"><c:out value="${note.n.presentielle}"></c:out> </c:if></td>
 
                                                         </tr>
                                                 </c:forEach>
@@ -309,13 +317,6 @@
                                         </table> 
 
                                         
-                                            <div class="form-actions">
-
-
-                                                <button type="submit" class="btn btn-primary">Ajouter</button>
-
-                                            </div>
-                                        </form>
 
                                     </div>
 

@@ -15,6 +15,8 @@ import com.iit.model.NiveauGroupe;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -71,7 +73,7 @@ public class MatiereEnsDAO {
 
             Matiere m;
 
-            ResultSet rs = connection.select("select * from matiere m where m.id_m not in (select id_m from matiere_ens where id_g='" + id_g + "' )  ;");
+            ResultSet rs = connection.select("select * from matiere m where m.id_m  in (select id_m from matiere_ens where id_g='" + id_g + "' )  ;");
             while (rs.next()) {
                 m = new Matiere(rs.getInt("id_m"), rs.getString("nom_m"));
                 mNotEns.add(m);
@@ -104,5 +106,50 @@ public class MatiereEnsDAO {
         }
         return m;
     }
+
+    public ArrayList listGroupeEns(String id_ens) {
+        ArrayList<NiveauGroupe> mgroupe = new ArrayList();
+        Groupe g;
+        NiveauGroupe nG;
+        Niveau n;
+        try {
+            ResultSet rs = connection.select("SELECT distinct id_g, g.*,n.* from matiere_ens m  , groupe g , niveau n where m.id_ens='" + id_ens + "' and g.id=m.id_g and n.id_n=g.id_n ;");
+           
+            while (rs.next()) {
+                n = new Niveau(rs.getString("nom_n"), rs.getString("code_n"));
+                g = new Groupe(rs.getInt("id"), rs.getString("nom"), rs.getString("code"));
+                nG = new NiveauGroupe(g,n);
+                mgroupe.add(nG);
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+
+        }
+        return mgroupe;
+    }
+
+    public ArrayList listmatiereEns(String id_ens, int id_g) {
+        ArrayList<MatiereEns> mEns = new ArrayList<MatiereEns>();
+        try {
+
+            MatiereEns mE;
+            Matiere m;
+            Groupe g;
+            ResultSet rs = connection.select("select * from matiere_ens me, groupe g , matiere m where me.id_ens='" + id_ens + "' and me.id_g='" + id_g + "'  and  me.id_g=g.id and me.id_m=m.id_m;");
+            while (rs.next()) {
+                m = new Matiere(rs.getInt("id_m"), rs.getString("nom_m"));
+                g = new Groupe(rs.getInt("id"), rs.getString("nom"), rs.getString("code"));
+                mE = new MatiereEns(rs.getInt("id_me"), g, m);
+
+                mEns.add(mE);
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+
+        }
+        return mEns;
+    }
+    
+     
 
 }

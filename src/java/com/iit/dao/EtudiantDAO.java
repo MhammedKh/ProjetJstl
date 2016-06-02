@@ -26,7 +26,9 @@ public class EtudiantDAO {
             Etudiant e;
             ResultSet rs = connection.select("select u.* ,g.nom as nom_g  from utilisateur u, groupe g where type='3' and u.id_g=g.id ;");
             while (rs.next()) {
-                System.err.println(rs.getInt("id"));
+               
+               
+                        
                 e = new Etudiant(rs.getInt("id"),rs.getString("nom"), rs.getString("prenom"), rs.getString("adresse"), rs.getString("tel"), rs.getInt("cin"), rs.getString("nom_g"));
                 ens.add(e);
             }
@@ -42,9 +44,9 @@ public class EtudiantDAO {
         ArrayList<Etudiant> ens = new ArrayList<Etudiant>();
         try {
             Etudiant e;
-            ResultSet rs = connection.select("select *  from utilisateur  where  u.id_g='"+id_g+"' ;");
+            ResultSet rs = connection.select("select *  from utilisateur  where  id_g='"+id_g+"' ;");
             while (rs.next()) {
-                System.err.println(rs.getInt("id"));
+                
                 e = new Etudiant(rs.getInt("id"),rs.getString("nom"), rs.getString("prenom"), rs.getInt("cin"));
                 ens.add(e);
             }

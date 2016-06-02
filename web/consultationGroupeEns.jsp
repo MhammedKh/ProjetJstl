@@ -124,7 +124,7 @@
                     <div class="row-fluid sortable">
                         <div class="box span12">
                             <div class="box-header" data-original-title>
-                                <h2><i class="halflings-icon list"></i><span class="break"></span>Choisir une Session</h2>
+                                <h2><i class="halflings-icon list"></i><span class="break"></span>Liste des groupes</h2>
                                 <div class="box-icon">
 
                                     <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
@@ -142,41 +142,27 @@
                                     <thead>
                                         <tr>
                                             
-                                            <th>Type</th>
-                                            <th>Date de début</th>
-                                             <th>Date de fin</th>
-                                            
+                                            <th>Nom</th>
+                                            <th>Code</th>
+                                            <th>Niveau</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>   
                                     <tbody>
-                                        <c:forEach items="${requestScope.sessionList}" var="session">
+                                        <c:forEach items="${requestScope.matens}" var="matens">
                                             <tr>
                                               
-                                                <td style="vertical-align:middle;" class="center" ><c:out value="${session.type}"></c:out></td>
-                                                <td style="vertical-align:middle;" class="center"><c:out value="${session.datedeb}"></c:out> </td>
-                                                <td style="vertical-align:middle;" class="center"><c:out value="${session.datefin}"></c:out> </td>
-                                               
-                                                 <c:if test="${requestScope.id_form == null}"> 
-                                                    <td style="vertical-align:middle;" class="center">
-                                                        <a class="btn btn-success" href="EcrireNumeroCompostage?id_s=<c:out value="${session.id}"></c:out>" >
+                                                <td style="vertical-align:middle;" class="center" ><c:out value="${matens.g.nom}"></c:out></td>
+                                                <td style="vertical-align:middle;" class="center"><c:out value="${matens.g.code}"></c:out> </td>
+                                                <td style="vertical-align:middle;" class="center"><c:out value="${matens.n.nom}"></c:out> </td>
+                                                <td style="vertical-align:middle;" class="center">
+                                                        <a class="btn btn-success" href="consultroupeEnsServlet?id_g=<c:out value="${matens.g.id}"></c:out>" >
                                                             <i class="halflings-icon white zoom-in"></i>  
                                                         </a>
                                                         
 
                                                     </td>
-                                                 </c:if>
-                                                           <c:if test="${requestScope.id_form !=null}"> 
-                                                    <td style="vertical-align:middle;" class="center">
-                                                        <a class="btn btn-success" href="consultnote?id_s=<c:out value="${session.id}"></c:out>" >
-                                                            <i class="halflings-icon white zoom-in"></i>  
-                                                        </a>
-                                                        
-
-                                                    </td>
-                                                 </c:if>
-                                                    
-                                                </tr>
+                                            </tr>
                                         </c:forEach>
 
 
@@ -192,7 +178,63 @@
                         </div><!--/span-->
 
                     </div><!--/row-->
+                    
+                     <c:if test="${requestScope.listM != null}"> 
+                    
+                    <div class="row-fluid sortable">
+                        <div class="box span12">
+                            <div class="box-header" data-original-title>
+                                <h2><i class="halflings-icon list"></i><span class="break"></span>Liste des groupes</h2>
+                                <div class="box-icon">
 
+                                    <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                                    <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+                                </div>
+
+
+                            </div>
+
+
+
+                            <div class="box-content">
+
+                                <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                                    <thead>
+                                        <tr>
+                                            
+                                            <th>Nom</th>
+                                            <th>Action</th>
+                                          
+                                        </tr>
+                                    </thead>   
+                                    <tbody>
+                                        <c:forEach items="${requestScope.listM}" var="listM">
+                                            <tr>
+                                              
+                                                <td style="vertical-align:middle;" class="center" ><c:out value="${listM.id_m.nom}"></c:out></td>
+                                                    <td style="vertical-align:middle;" class="center">
+                                                        <a class="btn btn-success" href="consultroupeEnsServlet?id_event=note&id_matEns=<c:out value="${listM.id}"></c:out>" >
+                                                            <i class="halflings-icon white zoom-in"></i>  
+                                                        </a>
+                                                        
+
+                                                    </td>                    </tr>
+                                        </c:forEach>
+
+
+
+                                    </tbody>
+                                </table> 
+
+                            </div>
+
+
+
+
+                        </div><!--/span-->
+
+                    </div><!--/row-->
+                     </c:if>
 
                 </div>
             </div>

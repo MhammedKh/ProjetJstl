@@ -7,6 +7,9 @@ package com.iit.controler;
 
 import com.iit.dao.UtilisateurDAO;
 import com.iit.model.ConnectionBaseDonnee;
+import com.iit.model.Enseignant;
+import com.iit.model.Etudiant;
+import com.iit.model.Utilisateur;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -50,27 +53,39 @@ public class AuthentificationServlet extends HttpServlet {
                 request.setAttribute("erreur", "Identificateur ou mot de passe invalide");
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/authentification.jsp");
                 rd.forward(request, response);
-            }
-            else
-            {
-                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/home.jsp");
-                 rd.forward(request, response);
+            } else {
+
+                Utilisateur u = uAdo.getUserLoginPass(login, mp);
+                if (u instanceof Enseignant) {
+                    request.getSession().setAttribute("ens", ((Enseignant) u).getId());
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/homeEnseignant.jsp");
+                    rd.forward(request, response);
+                } else {
+                
+                if (u instanceof Etudiant) {
+                    request.getSession().setAttribute("etud", ((Etudiant) u).getId());
+                }
+
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/home.jsp");
+                rd.forward(request, response);
+                }
             }
         }
-
     }
 
+
+
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+/**
+ * Handles the HTTP <code>GET</code> method.
+ *
+ * @param request servlet request
+ * @param response servlet response
+ * @throws ServletException if a servlet-specific error occurs
+ * @throws IOException if an I/O error occurs
+ */
+@Override
+        protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -84,7 +99,7 @@ public class AuthentificationServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -95,7 +110,7 @@ public class AuthentificationServlet extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+        public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

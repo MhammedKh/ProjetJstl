@@ -157,6 +157,7 @@
                                                 <td style="vertical-align:middle;" class="center"><c:out value="${session.datedeb}"></c:out> </td>
                                                 <td style="vertical-align:middle;" class="center"><c:out value="${session.datefin}"></c:out> </td>
                                                
+                                                 <c:if test="${requestScope.id_form == null}"> 
                                                     <td style="vertical-align:middle;" class="center">
                                                         <a class="btn btn-success" href="EcrireNumeroCompostage?id_s=<c:out value="${session.id}"></c:out>" >
                                                             <i class="halflings-icon white zoom-in"></i>  
@@ -164,6 +165,17 @@
                                                         
 
                                                     </td>
+                                                 </c:if>
+                                                           <c:if test="${requestScope.id_form !=null}"> 
+                                                    <td style="vertical-align:middle;" class="center">
+                                                        <a class="btn btn-success" href="consultnote?id_s=<c:out value="${session.id}"></c:out>" >
+                                                            <i class="halflings-icon white zoom-in"></i>  
+                                                        </a>
+                                                        
+
+                                                    </td>
+                                                 </c:if>
+                                                    
                                                 </tr>
                                         </c:forEach>
 

@@ -9,7 +9,7 @@ package com.iit.model;
  *
  * @author SAMSUNG
  */
-public class Enseignant {
+public class Enseignant extends Utilisateur{
 
 
     private int id;

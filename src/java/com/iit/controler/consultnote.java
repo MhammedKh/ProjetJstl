@@ -9,12 +9,14 @@ import com.iit.dao.EtudiantDAO;
 import com.iit.dao.GroupeDAO;
 import com.iit.dao.MatiereDAO;
 import com.iit.dao.MatiereEnsDAO;
+import com.iit.dao.NoteDAO;
 import com.iit.model.Etudiant;
 import com.iit.model.Groupe;
 import com.iit.model.Matiere;
 import com.iit.model.MatiereEns;
-import com.iit.model.Niveau;
 import com.iit.model.NiveauGroupe;
+import com.iit.model.Note;
+import com.iit.model.NoteEtud;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -29,8 +31,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author SAMSUNG
  */
-@WebServlet(name = "EcrireNumeroCompostage", urlPatterns = {"/EcrireNumeroCompostage"})
-public class EcrireNumeroCompostage extends HttpServlet {
+@WebServlet(name = "consultnote", urlPatterns = {"/consultnote"})
+public class consultnote extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,8 +47,7 @@ public class EcrireNumeroCompostage extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            GroupeDAO Groupe = new GroupeDAO();
+             GroupeDAO Groupe = new GroupeDAO();
 
             if (request.getParameter("id_event") != null) {
 
@@ -54,7 +55,7 @@ public class EcrireNumeroCompostage extends HttpServlet {
 
                     MatiereEnsDAO mE = new MatiereEnsDAO();
 
-                    ArrayList<Matiere> mGroupe = new ArrayList<Matiere>();
+                    ArrayList<Matiere> mGroupe ;
                     mGroupe = mE.listMatiereGroupe(Integer.parseInt(request.getParameter("id_g")));
 
                     Groupe g = Groupe.getGroupe(request.getParameter("id_g"));
@@ -62,32 +63,43 @@ public class EcrireNumeroCompostage extends HttpServlet {
                     request.setAttribute("matiereList", mGroupe);
 
                     request.setAttribute("id_session", request.getParameter("id_s"));
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/EcrireNumerodeCompostage.jsp");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/consultNoteAdmin.jsp");
                     rd.forward(request, response);
                 } else if (request.getParameter("id_event").equals("form")) {
-                    
-                    EtudiantDAO mE = new EtudiantDAO();
-                    ArrayList<Etudiant> mEtud = mE.listEtudGroupe(Integer.parseInt(request.getParameter("group")));
-                    MatiereEns mEns = new MatiereEnsDAO().getMatiereEns(Integer.parseInt(request.getParameter("group") ), Integer.parseInt(request.getParameter("matiere")));
-                    request.setAttribute("mat_ens", new MatiereEnsDAO().getMatiereEns(Integer.parseInt(request.getParameter("group") ), Integer.parseInt(request.getParameter("matiere"))));
-                 
-                   request.setAttribute("nom_g", request.getParameter("nom_groupe"));
-                    request.setAttribute("ListEtud", mEtud);
+                    ArrayList<Note> mNote= new ArrayList<Note>();
+                    NoteDAO mN = new NoteDAO();
+                    EtudiantDAO eDAO= new EtudiantDAO();
+                     MatiereEns mEns = new MatiereEnsDAO().getMatiereEns(Integer.parseInt(request.getParameter("group") ), Integer.parseInt(request.getParameter("matiere"))); 
+                     
+                     mNote = mN.listNoteMatiere(mEns.getId(),Integer.parseInt(request.getParameter("sess")));
+                   
+                     ArrayList<NoteEtud> listeNote= new ArrayList();
+                    Etudiant e;
+                    NoteEtud nEtud;
+                    for (int i=0;i<mNote.size();i++)
+                    {   
+                       e= eDAO.getEtud(String.valueOf(mNote.get(i).getIdEt()));
+                       nEtud= new NoteEtud(mNote.get(i), e);
+                       listeNote.add(nEtud);
+                    }
+                    request.setAttribute("listN", listeNote);
+                    request.setAttribute("nom_g", request.getParameter("nom_groupe"));
+                   
                     request.setAttribute("matiere", new MatiereDAO().getMatiere(request.getParameter("matiere")));
-                    request.setAttribute("id_session", request.getParameter("sess"));
-                   RequestDispatcher rd = getServletContext().getRequestDispatcher("/EcrireNumerodeCompostage.jsp");
+                 
+                   RequestDispatcher rd = getServletContext().getRequestDispatcher("/consultNoteAdmin.jsp");
                     rd.forward(request, response);
                 }
             } else {
 
-                ArrayList<NiveauGroupe> groupList = new ArrayList<NiveauGroupe>();
+                ArrayList<NiveauGroupe> groupList ;
 
                 groupList = Groupe.listGroupe();
 
                 request.setAttribute("groupList", groupList);
                 request.setAttribute("id_session", request.getParameter("id_s"));
 
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/EcrireNumerodeCompostage.jsp");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/consultNoteAdmin.jsp");
                 rd.forward(request, response);
             }
         }
