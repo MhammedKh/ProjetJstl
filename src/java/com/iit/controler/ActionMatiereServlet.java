@@ -5,12 +5,16 @@
  */
 package com.iit.controler;
 
+import com.iit.dao.GroupeDAO;
 import com.iit.dao.MatiereDAO;
+import com.iit.dao.MatiereEnsDAO;
 import com.iit.dao.NiveauDAO;
+import com.iit.model.Groupe;
 import com.iit.model.Matiere;
 import com.iit.model.Niveau;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -66,6 +70,20 @@ public class ActionMatiereServlet extends HttpServlet {
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/MatiereServlet");
                 rd.forward(request, response);
 
+            }else if(request.getParameter("id_event").equals("zoom")) {
+                MatiereEnsDAO mens = new MatiereEnsDAO();
+           
+             
+             ArrayList<Groupe> groupList = new ArrayList<Groupe>();
+              
+             groupList= mens.listGroupeMatiere(request.getParameter("id_m")); 
+             
+           
+            request.setAttribute("groupList", groupList);
+            
+            
+           RequestDispatcher rd = getServletContext().getRequestDispatcher("/ListeGroupeNiveau.jsp");
+             rd.forward(request, response);
             }
         }
     }

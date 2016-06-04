@@ -42,6 +42,25 @@ public class GroupeDAO {
         }
         return Ngroupe;
     }
+       public ArrayList listGroupeNiveau(String id_n) {
+        ArrayList<Groupe> Ngroupe = new ArrayList<Groupe>();
+        try {
+            Groupe g;
+            
+          
+            ResultSet rs = connection.select("select * from groupe g where  g.id_n='"+id_n+"'  ;");
+            while (rs.next()) {
+
+                g = new Groupe(rs.getInt("id"), rs.getString("nom"), rs.getString("code"));
+               
+                Ngroupe.add(g);
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+
+        }
+        return Ngroupe;
+    }
 
     public Groupe getGroupe(String id) {
         Groupe g = null;

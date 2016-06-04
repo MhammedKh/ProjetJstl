@@ -9,8 +9,10 @@ import com.iit.dao.GroupeDAO;
 import com.iit.dao.NiveauDAO;
 import com.iit.model.Groupe;
 import com.iit.model.Niveau;
+import com.iit.model.NiveauGroupe;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -65,6 +67,21 @@ public class ActionNiveauServlet extends HttpServlet {
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/NiveauServlet");
                 rd.forward(request, response);
 
+            }
+            else if(request.getParameter("id_event").equals("zoom")) {
+                GroupeDAO Groupe = new GroupeDAO();
+           
+             
+             ArrayList<Groupe> groupList = new ArrayList<Groupe>();
+              
+             groupList= Groupe.listGroupeNiveau(request.getParameter("id_n")); 
+             
+           
+            request.setAttribute("groupList", groupList);
+            
+            
+           RequestDispatcher rd = getServletContext().getRequestDispatcher("/ListeGroupeNiveau.jsp");
+             rd.forward(request, response);
             }
         }
     }

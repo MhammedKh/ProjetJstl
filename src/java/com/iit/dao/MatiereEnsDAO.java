@@ -149,6 +149,26 @@ public class MatiereEnsDAO {
         }
         return mEns;
     }
+    public ArrayList listGroupeMatiere(String id_m) {
+        ArrayList<Groupe> mEns = new ArrayList<>();
+        try {
+
+           
+            Groupe g;
+            ResultSet rs = connection.select("select g.* from matiere_ens me, groupe g , matiere m where me.id_m='" + id_m + "'  and  me.id_g=g.id and me.id_m=m.id_m;");
+            while (rs.next()) {
+               
+                g = new Groupe(rs.getInt("id"), rs.getString("nom"), rs.getString("code"));
+               
+
+                mEns.add(g);
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+
+        }
+        return mEns;
+    }
     
      
 
