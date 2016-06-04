@@ -141,7 +141,7 @@
 								<label class="control-label" for="selectError">Session</label>
 								<div class="controls">
                                                         <select id="selectError" value=" " name="groupe" data-rel="chosen" style="width: 300px;" onchange='window.location.href = "consultroupeEnsServlet?id_mat=" +<c:out value="${requestScope.id_me }"></c:out> + "&id_event=show&id_s=" + this.options[this.selectedIndex].value;'>
-                                                                
+                                                            <option class="default" style="text-align: center;">Choisir une Session</option>
                                                             <c:forEach items="${requestScope.sess}" var="sess">
                                                                 <option value="<c:out value="${sess.id}"></c:out>"> <c:out value="${sess.type}"></c:out> Du <c:out value="${sess.datedeb}"></c:out> Au <c:out value="${sess.datefin}"></c:out></option>
                                                             </c:forEach>
@@ -181,6 +181,7 @@
                                     <div class="box-content">
                                        
                                            <c:if test="${requestScope.ListNote != null}"> 
+                                               <c:if test="${requestScope.id_s.type =='Principale'}"> 
                                        
                                             <table class="table table-striped table-bordered bootstrap-datatable datatable" >
                                                 <thead>
@@ -207,10 +208,10 @@
                                                         <td style="vertical-align:middle;" class="center"><c:out value="${note.e.nom}"></c:out> </td>
                                                         <td style="vertical-align:middle;" class="center"><c:out value="${note.e.prenom}"></c:out> </td>
                                                         
-                                                        <td style="vertical-align:middle;" class="center"><c:if test="${note.n.ds != -1}"><c:out value="${note.n.tp}"></c:out></c:if></td>
+                                                        <td style="vertical-align:middle;" class="center"><c:if test="${note.n.tp != -1}"><c:out value="${note.n.tp}"></c:out></c:if></td>
                                                         <td style="vertical-align:middle;" class="center"><c:if test="${note.n.ds != -1}"><c:out value="${note.n.ds}"></c:out> </c:if></td>
-                                                        <td style="vertical-align:middle;" class="center"><c:if test="${note.n.ds != -1}"><c:out value="${note.n.examain}"></c:out></c:if> </td>
-                                                        <td style="vertical-align:middle;" class="center"><c:if test="${note.n.ds != -1}"><c:out value="${note.n.presentielle}"></c:out> </c:if></td>
+                                                        <td style="vertical-align:middle;" class="center"><c:if test="${note.n.examain != -1}"><c:out value="${note.n.examain}"></c:out></c:if> </td>
+                                                        <td style="vertical-align:middle;" class="center"><c:if test="${note.n.presentielle != -1}"><c:out value="${note.n.presentielle}"></c:out> </c:if></td>
 
                                                         </tr>
                                                 </c:forEach>
@@ -218,6 +219,43 @@
 
                                             </tbody>
                                         </table> 
+                                                </c:if>
+                                                        <c:if test="${requestScope.id_s.type =='Controle'}"> 
+                                       
+                                            <table class="table table-striped table-bordered bootstrap-datatable datatable" >
+                                                <thead>
+                                                    <tr>
+
+                                                        <th>CIN</th>
+                                                        <th>Nom </th>
+                                                        <th>Prenom</th>
+                                                        <th>Numéro Compostage</th>
+                                                        <th>Note</th> 
+                                                        
+
+
+                                                    </tr>
+                                                </thead>   
+                                                <tbody>
+
+                                                <c:forEach items="${requestScope.ListNote}" var="note">
+                                                    <tr>
+
+                                                        <td style="vertical-align:middle;" class="center"><c:out value="${note.e.cin}"></c:out></td>
+                                                        <td style="vertical-align:middle;" class="center"><c:out value="${note.e.nom}"></c:out> </td>
+                                                        <td style="vertical-align:middle;" class="center"><c:out value="${note.e.prenom}"></c:out> </td>
+                                                        <td style="vertical-align:middle;" class="center"><c:out value="${note.n.numCompostage}"></c:out> </td>
+                                         
+                                                        <td style="vertical-align:middle;" class="center"><c:if test="${note.n.examain != -1}"><c:out value="${note.n.examain}"></c:out></c:if> </td>
+                                                        
+                                                        </tr>
+                                                </c:forEach>
+
+
+                                            </tbody>
+                                        </table> 
+                                                </c:if>
+                                               
                                                 </c:if>
                                         
 

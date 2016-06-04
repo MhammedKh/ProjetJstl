@@ -5,17 +5,13 @@
  */
 package com.iit.controler;
 
-import com.iit.dao.UtilisateurDAO;
-import com.iit.model.ConnectionBaseDonnee;
-import com.iit.model.Enseignant;
-import com.iit.model.Etudiant;
-import com.iit.model.Utilisateur;
+import com.iit.dao.NoteDAO;
+import com.iit.dao.SessionDAO;
+import com.iit.model.MatEtud;
+import com.iit.model.Session;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,8 +23,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author SAMSUNG
  */
-@WebServlet(name = "AuthentificationServlet", urlPatterns = {"/AuthentificationServlet"})
-public class AuthentificationServlet extends HttpServlet {
+@WebServlet(name = "NoteEtudiant", urlPatterns = {"/NoteEtudiant"})
+public class NoteEtudiant extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,37 +40,25 @@ public class AuthentificationServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-
-            UtilisateurDAO uAdo = new UtilisateurDAO();
-
-            String login = request.getParameter("username");
-            String mp = request.getParameter("password");
-            if (uAdo.verifLogimMp(login, mp) == false) {
-                request.setAttribute("erreur", "Identificateur ou mot de passe invalide");
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/authentification.jsp");
-                rd.forward(request, response);
-            } else {
-
-                Utilisateur u = uAdo.getUserLoginPass(login, mp);
-                if (u instanceof Enseignant) {
-                    request.getSession().setAttribute("ens", ((Enseignant) u).getId());
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/homeEnseignant.jsp");
-                    rd.forward(request, response);
-                } else if (u instanceof Etudiant) {
-                    request.getSession().setAttribute("etud", ((Etudiant) u).getId());
-                    out.print("oooooo");
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/NoteEtudiant");
-                     rd.forward(request, response);
-                } else {
-
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/home.jsp");
-                    rd.forward(request, response);
-                }
+            SessionDAO sDAO = new SessionDAO();
+            ArrayList<Session> sessionList = new ArrayList<Session>();
+            sessionList = sDAO.listSession();
+            request.setAttribute("sessionList", sessionList);
+            if(request.getParameter("id_s")!=null)
+            {
+                NoteDAO nDAO = new NoteDAO();
+                
+                 ArrayList<MatEtud> lNote = new ArrayList<>();
+                 lNote = nDAO.listNoteEtudiant(Integer.parseInt(String.valueOf(request.getSession().getAttribute("etud"))),Integer.parseInt(request.getParameter("id_s")));
+                  request.setAttribute("session",sDAO.getSession(request.getParameter("id_s")) );
+                 request.setAttribute("listN", lNote);
             }
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/homeEtudiant.jsp");
+                rd.forward(request, response);
         }
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

@@ -9,49 +9,35 @@ package com.iit.model;
  *
  * @author SAMSUNG
  */
-public class Note {
+public class NoteEns {
     
-    private int idMe;
+     private int idMe;
     private int idEt;
     private int id_Ses;
-    private double tp;
-    private double ds;
-    private double examain;
-    private double presentielle;
+    private String tp;
+    private String ds;
+    private String examain;
+    private String presentielle;
     private String numCompostage;
 
-    public Note(double tp, double ds, double examain, double presentielle) {
-        this.tp = tp;
-        this.ds = ds;
+    public NoteEns(int idMe, int id_Ses, String examain, String numCompostage) {
+        this.idMe = idMe;
+        this.id_Ses = id_Ses;
         this.examain = examain;
-        this.presentielle = presentielle;
-    }
-
-    public Note(int idEt, double tp, double ds, double examain, double presentielle, String numCompostage) {
-        this.idEt = idEt;
-        this.tp = tp;
-        this.ds = ds;
-        this.examain = examain;
-        this.presentielle = presentielle;
         this.numCompostage = numCompostage;
     }
 
-    public Note(double tp, double ds, double examain, double presentielle, String numCompostage) {
-        this.tp = tp;
-        this.ds = ds;
-        this.examain = examain;
-        this.presentielle = presentielle;
-        this.numCompostage = numCompostage;
-    }
+    
+  
 
-    public Note(int idMe, int idEt, int id_Ses, String numCompostage) {
+    public NoteEns(int idMe, int idEt, int id_Ses, String tp, String ds, String presentielle) {
         this.idMe = idMe;
         this.idEt = idEt;
         this.id_Ses = id_Ses;
-        this.numCompostage = numCompostage;
+        this.tp = tp;
+        this.ds = ds;
+        this.presentielle = presentielle;
     }
-
-  
 
     public int getIdMe() {
         return idMe;
@@ -77,35 +63,35 @@ public class Note {
         this.id_Ses = id_Ses;
     }
 
-    public double getTp() {
+    public String getTp() {
         return tp;
     }
 
-    public void setTp(double tp) {
+    public void setTp(String tp) {
         this.tp = tp;
     }
 
-    public double getDs() {
+    public String getDs() {
         return ds;
     }
 
-    public void setDs(double ds) {
+    public void setDs(String ds) {
         this.ds = ds;
     }
 
-    public double getExamain() {
+    public String getExamain() {
         return examain;
     }
 
-    public void setExamain(double examain) {
+    public void setExamain(String examain) {
         this.examain = examain;
     }
 
-    public double getPresentielle() {
+    public String getPresentielle() {
         return presentielle;
     }
 
-    public void setPresentielle(double presentielle) {
+    public void setPresentielle(String presentielle) {
         this.presentielle = presentielle;
     }
 
@@ -116,7 +102,6 @@ public class Note {
     public void setNumCompostage(String numCompostage) {
         this.numCompostage = numCompostage;
     }
-    
     
     
     

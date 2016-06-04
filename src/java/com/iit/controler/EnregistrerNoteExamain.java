@@ -5,17 +5,11 @@
  */
 package com.iit.controler;
 
-import com.iit.dao.UtilisateurDAO;
-import com.iit.model.ConnectionBaseDonnee;
-import com.iit.model.Enseignant;
-import com.iit.model.Etudiant;
-import com.iit.model.Utilisateur;
+import com.iit.dao.NoteDAO;
+import com.iit.model.NoteEns;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Enumeration;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author SAMSUNG
  */
-@WebServlet(name = "AuthentificationServlet", urlPatterns = {"/AuthentificationServlet"})
-public class AuthentificationServlet extends HttpServlet {
+@WebServlet(name = "EnregistrerNoteExamain", urlPatterns = {"/EnregistrerNoteExamain"})
+public class EnregistrerNoteExamain extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,37 +38,39 @@ public class AuthentificationServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            /* TODO output your page here. You may use following sample code. */
+            Enumeration param = request.getParameterNames();
+            int idMe = Integer.parseInt(request.getParameter("mat_ens"));
+            int idSess = Integer.parseInt(request.getParameter("sessin"));
 
-            UtilisateurDAO uAdo = new UtilisateurDAO();
-
-            String login = request.getParameter("username");
-            String mp = request.getParameter("password");
-            if (uAdo.verifLogimMp(login, mp) == false) {
-                request.setAttribute("erreur", "Identificateur ou mot de passe invalide");
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/authentification.jsp");
-                rd.forward(request, response);
-            } else {
-
-                Utilisateur u = uAdo.getUserLoginPass(login, mp);
-                if (u instanceof Enseignant) {
-                    request.getSession().setAttribute("ens", ((Enseignant) u).getId());
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/homeEnseignant.jsp");
-                    rd.forward(request, response);
-                } else if (u instanceof Etudiant) {
-                    request.getSession().setAttribute("etud", ((Etudiant) u).getId());
-                    out.print("oooooo");
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/NoteEtudiant");
-                     rd.forward(request, response);
-                } else {
-
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/home.jsp");
-                    rd.forward(request, response);
-                }
+            param.nextElement();
+            param.nextElement();
+            param.nextElement();
+            String nComP;
+            NoteDAO nDAO = new NoteDAO();
+            NoteEns n;
+            String note;
+         
+            while (param.hasMoreElements()) {
+                nComP = (String) param.nextElement();
+               
+                   note=request.getParameter(nComP);
+                   if(note=="")
+                        note="-1";
+                    out.print(nComP+" ====> "+note);
+                    n= new NoteEns(idMe, idSess, note, nComP);
+                
+                nDAO.insertNoteExamain(n);
+                
             }
+            
+              RequestDispatcher rd = getServletContext().getRequestDispatcher("/saisieNote");
+            rd.forward(request, response);
+
         }
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

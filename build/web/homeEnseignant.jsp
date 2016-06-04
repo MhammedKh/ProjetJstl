@@ -1,7 +1,4 @@
-<?php 
-session_start();
 
-if(isset($_SESSION['id'])){ ?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -55,7 +52,7 @@ if(isset($_SESSION['id'])){ ?>
                     <!-- start: Header Menu -->
                     <div class="nav-no-collapse header-nav">
                         <ul class="nav pull-right">
-                            
+
                             <!-- start: Notifications Dropdown -->
 
 
@@ -67,7 +64,7 @@ if(isset($_SESSION['id'])){ ?>
 
                         </ul>
                     </div>
-                    
+
 
                 </div>
             </div>
@@ -83,11 +80,10 @@ if(isset($_SESSION['id'])){ ?>
                     <div class="nav-collapse sidebar-nav">
                         <ul class="nav nav-tabs nav-stacked main-menu">
 
-                            <li><a href="consultroupeEnsServlet"><i class="icon-edit"></i><span class="hidden-tablet"> Consulter les groupes</span></a></li>
-                            <li><a href="EtudiantServlet"><i class="icon-edit"></i><span class="hidden-tablet"> Consulter les Notes</span></a></li>
-                            <li><a href="GroupeServlet"><i class="icon-edit"></i><span class="hidden-tablet"> Saisie des Notes</span></a></li>
-    
-                            
+                            <li><a href="consultroupeEnsServlet"><i class="icon-list"></i><span class="hidden-tablet"> Consultation</span></a></li>
+                            <li><a href="saisieNote"><i class="icon-list"></i><span class="hidden-tablet"> Saisie des Notes</span></a></li>
+     
+
                         </ul>
                     </div>
                 </div>
@@ -117,7 +113,7 @@ if(isset($_SESSION['id'])){ ?>
 
                     <div class="box-content">
                         <div class="masonry-gallery">
-                            
+
 
                         </div>
                     </div><!--/span-->
@@ -199,5 +195,3 @@ if(isset($_SESSION['id'])){ ?>
 
     </body>
 </html>
-<?php 
-} ?>

@@ -68,6 +68,7 @@ public class consultroupeEnsServlet extends HttpServlet {
                 
                  session=sDAO.listSession();
                  request.setAttribute("sess", session);
+                 request.setAttribute("id_s",sDAO.getSession(request.getParameter("id_s")));
                  request.setAttribute("id_me", request.getParameter("id_mat"));
                   ArrayList<Note> mNote = new ArrayList<Note>();
                   ArrayList<NoteEtud> listeNote = new ArrayList<>();
@@ -105,7 +106,7 @@ public class consultroupeEnsServlet extends HttpServlet {
               
                 out.println(String.valueOf( request.getSession().getAttribute("ens")));
                 ArrayList<NiveauGroupe> ListG = mEDAO.listGroupeEns(String.valueOf(request.getSession().getAttribute("ens")));
-                out.println("nabil basggsas");
+           
                 request.setAttribute("matens", ListG);
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/consultationGroupeEns.jsp");
                 rd.forward(request, response);
