@@ -51,46 +51,7 @@
 
 
                     <!-- start: Header Menu -->
-                    <div class="nav-no-collapse header-nav">
-                        <ul class="nav pull-right">
-
-                            <!-- start: Notifications Dropdown -->
-
-
-                            <li>
-                                <a class="btn" href="./include/logout.php">
-                                    <i class="halflings-icon white  off"></i>
-                                </a>
-                            </li>
-
-                        </ul>
-                    </div>
-                    
-
-                </div>
-            </div>
-        </div>
-        <!-- start: Header -->
-
-        <div class="container-fluid-full">
-            <div class="row-fluid">
-
-                <!-- start: Main Menu -->
-
-                <div id="sidebar-left" class="span2">
-                    <div class="nav-collapse sidebar-nav">
-                        <ul class="nav nav-tabs nav-stacked main-menu">
-
-                            <li><a href="edit_fourniseur.php"><i class="icon-edit"></i><span class="hidden-tablet"> Enseignant</span></a></li>
-                            <li><a href="edit_produit.php"><i class="icon-edit"></i><span class="hidden-tablet"> Etudiant</span></a></li>
-                            <li><a href="edit_commande.php"><i class="icon-edit"></i><span class="hidden-tablet"> Groupe</span></a></li>
-                            <li><a href="edit_commande.php"><i class="icon-edit"></i><span class="hidden-tablet"> Niveau</span></a></li>
-                            <li><a href="edit_commande.php"><i class="icon-edit"></i><span class="hidden-tablet"> Session</span></a></li>
-                            <li><a href="edit_commande.php"><i class="icon-edit"></i><span class="hidden-tablet">Gestion des notes</span></a></li>
-
-                        </ul>
-                    </div>
-                </div>
+                   <jsp:include page="/includeJSP/Admin.jsp" />
                 <!-- end: Main Menu -->
 
                 <noscript>
@@ -294,9 +255,7 @@
                                                 <td style="vertical-align:middle;" class="center"><c:out value="${etud.tel}"></c:out></td>
                                                  <td style="vertical-align:middle;" class="center"><c:out value="${etud.groupe}"></c:out></td>
                                                     <td style="vertical-align:middle;" class="center">
-                                                        <a class="btn btn-success" href="ActionEtudiantServlet?id_event=zoom&id_e=<c:out value="${etud.id}"></c:out>" >
-                                                            <i class="halflings-icon white zoom-in"></i>  
-                                                        </a>
+                                                        
                                                         <a class="btn btn-info" href="ActionEtudiantServlet?id_event=edit&id_e=<c:out value="${etud.id}"></c:out>" >
                                                             <i class="halflings-icon white edit"></i>  
                                                         </a>
